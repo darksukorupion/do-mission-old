@@ -1,8 +1,17 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import Link from "next/link";
 
 export default function Home() {
-  return <h1 className={`text-3xl font-bold mt-10 text-center`}>Homeです</h1>;
+  return (
+    <>
+      <div className={`text-2xl font-bold text-center space-y-4 pt-10`}>
+        <h1 className={`text-5xl`}>Do Mission</h1>
+        <p>あなたのモチベーション管理をサポートします</p>
+        <div>
+          <Link href="/record" className={`mx-auto text-blue-600`}>
+            チャレンジする
+          </Link>
+        </div>
+      </div>
+    </>
+  );
 }
