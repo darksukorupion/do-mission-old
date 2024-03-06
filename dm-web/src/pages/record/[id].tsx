@@ -1,9 +1,18 @@
 import Link from "next/link";
 import { axiosInstance } from "../../utils/axios";
 
+type Missions = {
+  id: number;
+  user_id: number | null;
+  title: string;
+  summary: string;
+  created_at: Number;
+  update_at: Number;
+};
+
 const getAllMissionIds = async () => {
   const res = await axiosInstance.get("/missions");
-  const missions = res.data;
+  const missions: Missions[] = res.data;
   return missions.map((mission) => {
     return {
       params: {
@@ -13,11 +22,17 @@ const getAllMissionIds = async () => {
   });
 };
 
-export async function getStaticProps({ params }) {
+type test = {
+  (id: number): Missions;
+};
+
+type Params = {
+  params: { id: number };
+};
+
+export async function getStaticProps({ params }: Params) {
   const res = await axiosInstance.get(`/missions/${params.id}`);
-  const missionData = res.data;
-  console.log("getStaticPropsを実行しました");
-  console.log(missionData);
+  const missionData: Missions = res.data;
   return {
     props: {
       missionData,
@@ -27,15 +42,13 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   const paths = await getAllMissionIds();
-  console.log("getStaticPathsを実行しました");
-  console.log(paths);
   return {
     paths,
     fallback: false,
   };
 }
 
-export default function RecordShow({ missionData }) {
+export default function RecordShow({ missionData }: { missionData: Missions }) {
   return (
     <>
       <div className={`text-2xl font-bold text-center space-y-4 pt-10`}>

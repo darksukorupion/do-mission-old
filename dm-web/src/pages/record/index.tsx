@@ -2,13 +2,23 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { axiosInstance } from "../../utils/axios";
 
+type Missions = {
+  id: number;
+  user_id: number | null;
+  title: string;
+  summary: string;
+  created_at: Number;
+  update_at: Number;
+};
+
 export default function RecodeHome() {
-  const [missions, setMissions] = useState<any>();
+  const [missions, setMissions] = useState<Missions[]>();
 
   useEffect(() => {
     const f = async () => {
       const res = await axiosInstance.get("/missions");
       setMissions(res.data);
+      console.log(missions);
     };
     f();
   }, []);
@@ -29,7 +39,7 @@ export default function RecodeHome() {
         <div>
           <p className={`mt-10`}>ミッション一覧</p>
           <ul>
-            {missions?.map((mission: any) => (
+            {missions?.map((mission) => (
               <Link
                 href={`/record/${mission.id}`}
                 key={mission.id}
