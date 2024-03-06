@@ -38,12 +38,30 @@ export async function getStaticPaths() {
 export default function RecordShow({ missionData }) {
   return (
     <>
-      <article>
-        <h1>{missionData.title}</h1>
-        <div>
-          <p>{missionData.summary}</p>
+      <div className={`text-2xl font-bold text-center space-y-4 pt-10`}>
+        <h1 className={`text-4xl`}>record/[id]です</h1>
+        <p>ミッションの詳細の表示</p>
+
+        <div className={``}>
+          <div className={``}>
+            <p>タイトル</p>
+            <p className={``}>{missionData.title}</p>
+          </div>
+
+          <div className={``}>
+            <p>サマリー</p>
+            <p>{missionData.summary}</p>
+          </div>
         </div>
-      </article>
+        <div>
+          <Link
+            href="/record"
+            className={`mx-auto text-blue-600 hover:text-blue-400`}
+          >
+            戻る
+          </Link>
+        </div>
+      </div>
     </>
   );
 }

@@ -29,13 +29,13 @@ export default function RecodeHome() {
         <div>
           <p className={`mt-10`}>ミッション一覧</p>
           <ul>
-            {missions?.map((m: any) => (
+            {missions?.map((mission: any) => (
               <Link
-                href={`/record/${m.id}`}
-                key={m.id}
+                href={`/record/${mission.id}`}
+                key={mission.id}
                 className={`mx-auto text-blue-600 hover:text-blue-400`}
               >
-                <li>{m.title}</li>
+                <li>{mission.title}</li>
               </Link>
             ))}
           </ul>
