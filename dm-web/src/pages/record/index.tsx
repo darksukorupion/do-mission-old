@@ -31,7 +31,7 @@ export default function RecodeHome() {
           <ul>
             {missions?.map((m: any) => (
               <Link
-                href={`/missions/${m.id}`}
+                href={`/record/${m.id}`}
                 key={m.id}
                 className={`mx-auto text-blue-600 hover:text-blue-400`}
               >
