@@ -12,7 +12,7 @@ type Missions = {
 
 const getAllMissionIds = async () => {
   const res = await axiosInstance.get("/missions");
-  const missions: Missions[] = res.data;
+  const missions: Missions[] = res.data.missions;
   return missions.map((mission) => {
     return {
       params: {

@@ -1,8 +1,17 @@
 class MissionsController < ApplicationController
 
   def index
-    missions = Mission.all
-    render json: missions
+    @missions = Mission.all
+    now = Date.current
+    @date = now
+    @dead_line = Date.new(2024, 3, 20)
+    @remain = (@dead_line - @date).numerator
+
+    data = {
+      missions: @missions, date: @date, dead_line: @dead_line, remain: @remain
+    }
+    
+    render json: data
   end
 
   def show
@@ -20,5 +29,7 @@ class MissionsController < ApplicationController
   def mission_params
     params.require(:mission).permit(:title, :summary)
   end
+
+  
 
 end

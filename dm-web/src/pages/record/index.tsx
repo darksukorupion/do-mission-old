@@ -13,12 +13,19 @@ type Missions = {
 
 export default function RecodeHome() {
   const [missions, setMissions] = useState<Missions[]>();
+  const [date, setDate] = useState();
+  const [deadLine, setDeadLine] = useState();
+  const [remain, setRemain] = useState();
 
   useEffect(() => {
     const f = async () => {
       const res = await axiosInstance.get("/missions");
-      setMissions(res.data);
+      setMissions(res.data.missions);
+      setDate(res.data.date);
+      setDeadLine(res.data.dead_line);
+      setRemain(res.data.remain);
       console.log(missions);
+      console.log(date);
     };
     f();
   }, []);
@@ -27,6 +34,9 @@ export default function RecodeHome() {
     <>
       <div className={`text-2xl font-bold text-center space-y-4 pt-10`}>
         <h1 className={`text-4xl`}>record/indexです</h1>
+        <h1>{date}</h1>
+        <h1>{deadLine}</h1>
+        <h1>{remain}</h1>
         <p className={``}>ミッションの一覧 / 新規作成画面へのリンク</p>
         <div>
           <Link
